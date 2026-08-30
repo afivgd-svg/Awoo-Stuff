@@ -13,7 +13,7 @@ jobs:
       matrix:
         config:
         - name: Windows
-          os: windows-2022
+          os: windows-latest
 
         - name: macOS
           os: macos-latest
@@ -36,24 +36,11 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
-      - name: Install older LLVM
-        if: matrix.config.name == 'Windows'
-        shell: bash
-        run: |
-          choco install llvm --version=19.1.7 -y --force
-          echo "C:\Program Files\LLVM\bin" >> $GITHUB_PATH
-
-#      - name: Build the mod
-#        uses: geode-sdk/build-geode-mod@main
-#        with:
-#          combine: true
-#          target: ${{ matrix.config.target }}
       - name: Build the mod
         uses: geode-sdk/build-geode-mod@main
         with:
           combine: true
           target: ${{ matrix.config.target }}
-          sdk: v5.5.2
 
   package:
     name: Package builds
