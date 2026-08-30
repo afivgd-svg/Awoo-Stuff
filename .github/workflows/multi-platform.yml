@@ -43,11 +43,17 @@ jobs:
           choco install llvm --version=19.1.7 -y --force
           echo "C:\Program Files\LLVM\bin" >> $GITHUB_PATH
 
+#      - name: Build the mod
+#        uses: geode-sdk/build-geode-mod@main
+#        with:
+#          combine: true
+#          target: ${{ matrix.config.target }}
       - name: Build the mod
         uses: geode-sdk/build-geode-mod@main
         with:
           combine: true
           target: ${{ matrix.config.target }}
+          sdk: nightly
 
   package:
     name: Package builds
