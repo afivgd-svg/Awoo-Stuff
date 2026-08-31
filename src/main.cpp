@@ -7,7 +7,7 @@
 
 using namespace geode::prelude;
 
-// very messy code ngl lmao. wait no i mean all this code lmao
+// very messy code ngl lmao. wait no i mean all this code lmao. atleast it's better than early 2.0 levels
 
 class $modify(MyCCMenuItemSpriteExtra, CCMenuItemSpriteExtra) { // "Activated", "Selected", "Unselected"
 	void activate() {
@@ -45,17 +45,38 @@ class $modify(MyCCMenuItemSpriteExtra, CCMenuItemSpriteExtra) { // "Activated", 
 };
 
 // stolen from Geometwy Dash because yes :3 atleast Naiko happy lol AWOO!
-class $modify(CCLabelBMFont) {
+// this should not exist. sscrappoed because its so stoopeed
+/*class $modify(CCLabelBMFont) {
 	static CCLabelBMFont* create(char const* str, char const* fntFile) {
-		std::string awooStr(str);
-		std::string endText = Mod::get()->getSettingValue<std::string>("custom-text-at-the-end-text");
+		//fmt::format awooStr(str);
+		//fmt::format endText = Mod::get()->getSettingValue<fmt::format>("custom-text-at-the-end-text");
 
-		bool doWeAwoo = Mod::get()->getSettingValue<bool>("add-awoo-to-end-text");
-		if (doWeAwoo) return CCLabelBMFont::create((awooStr + " " + endText).c_str(), fntFile);
+		//bool doWeAwoo = Mod::get()->getSettingValue<bool>("add-awoo-to-end-text");
+		//if (doWeAwoo) return CCLabelBMFont::create((awooStr + " " + endText).c_str(), fntFile);
+
+		
 
 		return CCLabelBMFont::create(str, fntFile);
 	}
 };
+
+
+		"add-awoo-to-end-text": {
+    		"type": "bool",
+    		"name": "Toggle Custom End Text",
+    		"description": "Add 'Awoo' at every text at the end. because why not? :3",
+    		"default": false
+		},
+		"custom-text-at-the-end-text": {
+			"type": "string",
+			"name": "Custom Text",
+			"enable-if": "add-awoo-to-end-text",
+			"default": "awoo"
+		},
+		
+- add text at the end of every text (execpt text that change)
+
+*/
 
 class $modify(PlayLayer) {
 	bool init(GJGameLevel* level, bool useReplay, bool dontCreateObjects) {
@@ -79,9 +100,8 @@ class $modify(PlayLayer) {
 				jumpscareSprite->setScaleX(winSize.width / jumpscareSprite->getContentSize().width);
 				jumpscareSprite->setScaleY(winSize.height / jumpscareSprite->getContentSize().height);
 				jumpscareSprite->setOpacity(0);
-				jumpscareSprite->setID("jumps"); // DON'T ASK ME. don't...
-				auto uiLayer = this->getChildByID("UILayer");
-				uiLayer->addChild(jumpscareSprite, 9999);
+				jumpscareSprite->setID("jumps"_spr); // DON'T ASK ME. don't...
+				this->m_uiLayer->addChild(jumpscareSprite, 9999);
 			}
 		}
 		
@@ -104,11 +124,11 @@ class $modify(MyPlayerObject, PlayerObject) {
 		bool doWeDoJumpscare = Mod::get()->getSettingValue<bool>("bool-enable-awoo-jumpscare");
 		bool doWeAwoo = Mod::get()->getSettingValue<bool>("bool-enable-awoo-on-jump");
 
-		auto sprite = (CCSprite*)playLayer->getChildByID("UILayer")->getChildByID("jumps");
+		auto sprite = (CCSprite*)playLayer->m_uiLayer->getChildByID("jumps"_spr);
 		if (!sprite) doWeDoJumpscare = false;
 
 		if (doWeDoJumpscare || doWeAwoo) {
-			if ((m_isShip || m_isBird || m_isDart || m_isSpider || m_isSwing)) { // uh.. basically isCube, isRobot, or isBall lmao. wait no. NO WAY I REMOVED THE EXCLAMATION MARQ
+			if ((m_isShip || m_isBird || m_isDart || m_isSwing)) { // uh.. basically isCube, isRobot, isBall, or isSpider lmao. wait no. NO WAY I REMOVED THE EXCLAMATION MARQ
 				if (doWeDoJumpscare) {
 					MyPlayerObject::duar(sprite);
 				}
@@ -136,11 +156,11 @@ class $modify(MyPlayerObject, PlayerObject) {
 			bool doWeDoJumpscare = Mod::get()->getSettingValue<bool>("bool-enable-awoo-jumpscare");
 			bool doWeAwoo = Mod::get()->getSettingValue<bool>("bool-enable-awoo-on-jump");
 
-			auto sprite = (CCSprite*)playLayer->getChildByID("UILayer")->getChildByID("jumps");
+			auto sprite = (CCSprite*)playLayer->m_uiLayer->getChildByID("jumps"_spr);
 			if (!sprite) doWeDoJumpscare = false;
 
 			if (doWeDoJumpscare || doWeAwoo) {
-				if (!(m_isShip || m_isBird || m_isDart || m_isSpider || m_isSwing)) { // i like copy and paste :3
+				if (!(m_isShip || m_isBird || m_isDart || m_isSwing)) { // i like copy and paste :3
 					if (doWeDoJumpscare) {
 						MyPlayerObject::duar(sprite);
 					}
@@ -164,7 +184,7 @@ class $modify(MyPlayerObject, PlayerObject) {
 		bool doWeDoJumpscare = Mod::get()->getSettingValue<bool>("bool-enable-awoo-jumpscare");
 		bool doWeAwoo = Mod::get()->getSettingValue<bool>("bool-enable-awoo-on-jump");
 
-		auto sprite = (CCSprite*)playLayer->getChildByID("UILayer")->getChildByID("jumps");
+		auto sprite = (CCSprite*)playLayer->m_uiLayer->getChildByID("jumps"_spr);
 		if (!sprite) doWeDoJumpscare = false;
 
 		if (doWeDoJumpscare || doWeAwoo) {
@@ -181,14 +201,14 @@ class $modify(MyPlayerObject, PlayerObject) {
 	void updateJump(float dt) {
 		if (m_holdingButtons[1]) {
 			if (m_isOnGround) {
-				if (!(m_isShip || m_isBall || m_isBird || m_isDart || m_isRobot || m_isSpider || m_isSwing) || ((m_isBall || m_isRobot) && !m_fields->hasJumped)) {
+				if (!(m_isShip || m_isBall || m_isBird || m_isDart || m_isRobot || m_isSwing) || ((m_isBall || m_isRobot || m_isSpider) && !m_fields->hasJumped)) {
 					PlayLayer* playLayer = PlayLayer::get();
 					if (!playLayer) { PlayerObject::updateJump(dt); return; }
 
 					bool doWeDoJumpscare = Mod::get()->getSettingValue<bool>("bool-enable-awoo-jumpscare");
 					bool doWeAwoo = Mod::get()->getSettingValue<bool>("bool-enable-awoo-on-jump");
 
-					auto sprite = (CCSprite*)playLayer->getChildByID("UILayer")->getChildByID("jumps");
+					auto sprite = (CCSprite*)playLayer->m_uiLayer->getChildByID("jumps"_spr);
 					if (!sprite) doWeDoJumpscare = false;
 
 
@@ -212,10 +232,10 @@ class $modify(MyPlayerObject, PlayerObject) {
 	}
 
 	void duar(CCSprite* fg) { // kaboom? yes Riko, kaboom
-		fg->stopActionByTag(0);
+		fg->stopActionByTag(872355); // can a tag be this long? btw, its reference from. the bite of rah, whats funnier than 22, andd king sammelottest
 		fg->setOpacity(255);
 		auto action = CCFadeTo::create(0.5f, 0);
-		action->setTag(0);
+		action->setTag(872355);
 		fg->runAction(action);
 	}
 

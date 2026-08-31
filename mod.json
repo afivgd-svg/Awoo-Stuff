@@ -10,75 +10,65 @@
 	"name": "Awoo Stuff",
 	"version": "v1.0.0",
 	"developer": "AFiVGD",
-	"description": "",
-	"dependencies": {
-		"geode.node-ids": ">=v1.23.3"
-	},
+	"description": "very cool mod",
+	"tags": [
+		"offline",
+		"joke"
+	],
 	"resources": {
 		"files": [
 			"resources/flea-awoo.mp3"
 		],
 		"sprites": [
-			"resources/flea-guy-idk.jpg"
+			"resources/flea-guy-idk.png"
 		]
 	},
 	"settings": {
 		"bool-enable-awoo": {
     		"type": "bool",
-    		"name": "Enable The Awoo",
+    		"name": "Enable Sounds on Button",
     		"description": "Enable the sound when clicking buttons. bro, it literally says 'enable', WHY WOULD YOU EVEN PRESS THIS BUTTON",
     		"default": true
 		},
 		"awoo-on": {
 			"type": "string",
     		"name": "Awoo On",
-    		"description": "When will awoo sounded gagaga bruh on what button event yes",
+    		"description": "When sound will be played. Activated: button pressed, Selected: when the button is CLICKED or you hover the button, Unselected: When you unhover the button",
     		"default": "Activated",
 			"one-of": ["Activated", "Selected", "Unselected"]
 		},
 		"bool-enable-awoo-on-jump": {
     		"type": "bool",
     		"name": "Enable Awoo Jumping",
-    		"description": "Enable the sound when jumping",
+    		"description": "Enable the sound when jump on cube and robot, flip on ball and spider, and when clicking on other gamemodes (ship, ufo, wave, swing)",
     		"default": true
 		},
 		"bool-enable-awoo-jumpscare": {
     		"type": "bool",
     		"name": "Enable Awoo Jumpscare",
-    		"description": "Enable the awoo jumpscare when jumping",
+    		"description": "Enable the awoo jumpscare when jump on cube and robot, flip on ball and spider, and when clicking on other gamemodes (ship, ufo, wave, swing)",
     		"default": true
-		},
-		"add-awoo-to-end-text": {
-    		"type": "bool",
-    		"name": "Add AWOOnes",
-    		"description": "Add 'Awoo' at every text at the end. because why not? :3",
-    		"default": false
-		},
-		"custom-text-at-the-end-text": {
-			"type": "string",
-			"name": "Text",
-			"default": "awoo"
 		},
 		"custom-button-sound-volume": {
 			"type": "float",
-			"name": "Volume",
-			"description": "How loud the custom sound is, WHY NOTTTTT?? :3",
+			"name": "Audio Volume",
+			"description": "How loud the custom sound is",
 			"default": 1,
 			"min": 0,
-			"max": 10,
+			"max": 500,
 			"control": {
 				"arrows": true,
-				"arrow-step": 0.01,
+				"arrow-step": 2.5,
 				"big-arrows": true,
-				"big-arrow-step": 0.05,
+				"big-arrow-step": 5,
 				"slider": true,
-				"slider-step": 0.005,
+				"slider-step": 0.1,
 				"input": true
     		}
 		},
 		"custom-audio-path": {
 			"type": "file",
-			"name": "Audio File",
+			"name": "Custom Audio File",
 			"default": "{mod_resources_dir}/flea-awoo.mp3",
 			"control": {
 				"dialog": "open",
@@ -92,7 +82,7 @@
 		},
 		"flea-jumpscare-img": {
 			"type": "file",
-			"name": "Image Jumpscare",
+			"name": "Custom Image Jumpscare",
 			"default": "{mod_resources_dir}/flea-guy-idk.jpg",
 			"control": {
 				"dialog": "open",
