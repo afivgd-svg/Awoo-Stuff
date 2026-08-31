@@ -1,5 +1,5 @@
 # Awoo Stuff
-bro got the Joe Metri Desh curse of Rah and died to 92% on Heliopopalis
+Custom sounds and jumpscares on Button Clicks and Gamemode Actions!
 
 Cool <img src="logo.png" width="80" alt="the mod's logo" /> Mod
 
