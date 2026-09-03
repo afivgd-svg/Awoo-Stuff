@@ -35,7 +35,7 @@ class $modify(MyCCMenuItemSpriteExtra, CCMenuItemSpriteExtra) { // "Activated", 
 		bool isAwooEnabled = Mod::get()->getSettingValue<bool>("bool-enable-awoo");
 		if (isAwooEnabled) {
 			std::filesystem::path audioFilePath = Mod::get()->getSettingValue<std::filesystem::path>("custom-audio-path");
-			if (audioFilePath.empty()) audioFilePath = Mod::get()->getResourcesDir() / "flea-awoo.mp3"; // WHY TF DOES IT DIVIDE BROW
+			if (audioFilePath.empty()) audioFilePath = "flea-awoo.mp3"_spr;
 
 			float audioVolume = Mod::get()->getSettingValue<float>("custom-button-sound-volume");
 
@@ -91,7 +91,7 @@ class $modify(PlayLayer) {
 		if (isJumpscare) {
 			std::filesystem::path fleaImgPath = Mod::get()->getSettingValue<std::filesystem::path>("flea-jumpscare-img");
 			if (fleaImgPath.empty()) {
-				fleaImgPath = Mod::get()->getResourcesDir() / "flea-guy-idk.png"; // WHY TF DOES IT DIVIDE BROW
+				fleaImgPath = "flea-guy-idk.png"_spr;
 			}
 
 			if (std::filesystem::exists(fleaImgPath)) {
@@ -241,7 +241,7 @@ class $modify(MyPlayerObject, PlayerObject) {
 
 	void awoo() { // awoo? yes Naiko, awoo
 		std::filesystem::path audioFilePath = Mod::get()->getSettingValue<std::filesystem::path>("custom-audio-path");
-		if (audioFilePath.empty()) audioFilePath = Mod::get()->getResourcesDir() / "flea-awoo.mp3"; // WHY TF DOES IT DIVIDE BROW
+		if (audioFilePath.empty()) audioFilePath = "flea-awoo.mp3"_spr;
 
 		float audioVolume = Mod::get()->getSettingValue<float>("custom-button-sound-volume");
 

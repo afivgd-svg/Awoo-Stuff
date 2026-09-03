@@ -6,11 +6,11 @@
 		"mac": "2.2081",
 		"ios": "2.2081"
 	},
-	"id": "afivgd.awoostuff",
-	"name": "Awoo Stuff",
+	"id": "afivgd.playsoundonbuttonclick",
+	"name": "Play Sound On Button Click",
 	"version": "v1.0.0",
 	"developer": "AFiVGD",
-	"description": "very cool mod",
+	"description": "Play sounds when a button is clicked",
 	"tags": [
 		"offline",
 		"joke"
@@ -27,27 +27,27 @@
 		"bool-enable-awoo": {
     		"type": "bool",
     		"name": "Enable Sounds on Button",
-    		"description": "Enable the sound when clicking buttons. bro, it literally says 'enable', WHY WOULD YOU EVEN PRESS THIS BUTTON",
+    		"description": "Enable the sound when clicking buttons. bro, it literally says 'Enable Sounds on Button', <c_>WHY WOULD YOU EVEN PRESS THIS INFO BUTTON</c>. oh, maybe <cj>you</c> think theres a <cy>secret...</c> no <cr>theres no secret</c>. now get the <c_>fap OUT</c>",
     		"default": true
 		},
 		"awoo-on": {
 			"type": "string",
-    		"name": "Awoo On",
-    		"description": "When sound will be played. Activated: button pressed, Selected: when the button is CLICKED or you hover the button, Unselected: When you unhover the button",
+    		"name": "Play Sound On",
+    		"description": "What button EVENT the sound will be played. Activated: button pressed, Selected: when the button is CLICKED or you hover the button, Unselected: When you unhover the button",
     		"default": "Activated",
 			"one-of": ["Activated", "Selected", "Unselected"]
 		},
 		"bool-enable-awoo-on-jump": {
     		"type": "bool",
-    		"name": "Enable Awoo Jumping",
+    		"name": "Enable Sound On Jumping",
     		"description": "Enable the sound when jump on cube and robot, flip on ball and spider, and when clicking on other gamemodes (ship, ufo, wave, swing)",
-    		"default": true
+    		"default": false
 		},
 		"bool-enable-awoo-jumpscare": {
     		"type": "bool",
-    		"name": "Enable Awoo Jumpscare",
+    		"name": "Enable Jumpscare On Jumping",
     		"description": "Enable the awoo jumpscare when jump on cube and robot, flip on ball and spider, and when clicking on other gamemodes (ship, ufo, wave, swing)",
-    		"default": true
+    		"default": false
 		},
 		"custom-button-sound-volume": {
 			"type": "float",
@@ -69,7 +69,7 @@
 		"custom-audio-path": {
 			"type": "file",
 			"name": "Custom Audio File",
-			"default": "{mod_resources_dir}/flea-awoo.mp3",
+			"default": "",
 			"control": {
 				"dialog": "open",
 				"filters": [
@@ -83,7 +83,7 @@
 		"flea-jumpscare-img": {
 			"type": "file",
 			"name": "Custom Image Jumpscare",
-			"default": "{mod_resources_dir}/flea-guy-idk.jpg",
+			"default": "",
 			"control": {
 				"dialog": "open",
 				"filters": [
