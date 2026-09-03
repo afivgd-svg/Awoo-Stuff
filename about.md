@@ -1,5 +1,7 @@
 # Description
-the original idea was flea "awoo"ing when you pressed a button. but i keep adding things and it become this.
+play sounds on button click
+
+the original idea was flea "awoo"ing when you pressed a button. but i keep adding things and it become this. it has TWO more features
 
 # Feature
 - Custom sounds playing when you pressed a button
